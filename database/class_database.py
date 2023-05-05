@@ -17,7 +17,7 @@ class DataBase():
         self.cur.execute(query, data)
         self.conn.commit()
         
-    def select_data(self, table_name, colums= tuple | None, conditions = tuple | None):
+    def select_data(self, table_name: str, colums= tuple | None, conditions = tuple | None):
         colums_str = "*" if not colums else ", ".join(colums)
         query = f"SELECT {colums_str} FROM {table_name}"
         if conditions:
@@ -25,6 +25,19 @@ class DataBase():
         self.cur.execute(query)
         rows = self.cur.fetchall()
         return rows
+    
+    def update_info(self, table_name: str, search_column: str,
+                    what_up: tuple, primary_key, data: tuple):
+        
+        for_up = " ".join([upd+"=?" for upd in what_up])
+        search_column = search_column+"=?"
+        
+        updating_inf = data + (primary_key,)
+        query = f"""UPDATE {table_name} SET {for_up} WHERE {search_column}"""
+        
+        self.cur.execute(query, updating_inf)
+        self.conn.commit()
+        
     
     def close_conn(self):
         self.conn.commit()
