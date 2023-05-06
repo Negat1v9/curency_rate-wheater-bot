@@ -29,10 +29,10 @@ class DataBase():
     def update_info(self, table_name: str, search_column: str,
                     what_up: tuple, primary_key, data: tuple):
         
-        for_up = " ".join([upd+"=?" for upd in what_up])
+        for_up = " ".join([upd+"=?" for upd in what_up])#->updating column
         search_column = search_column+"=?"
         
-        updating_inf = data + (primary_key,)
+        updating_inf = data + (primary_key,)#->tuple in sql query
         query = f"""UPDATE {table_name} SET {for_up} WHERE {search_column}"""
         
         self.cur.execute(query, updating_inf)
