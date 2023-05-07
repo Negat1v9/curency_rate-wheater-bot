@@ -30,8 +30,8 @@ async def main(): #--> главаня функция бота
 
     #подлючаем роутеры в порядке переоритета
     dp.include_router(user_handlers.router)
+    dp.include_router(test_handlers.router)
     dp.include_router(some_handlers.router)
-    # dp.include_router(test_handlers.router)
     
     #удаляем все сообщщения которые могли придти пока бот не активен
     await bot.delete_webhook(drop_pending_updates=True)
