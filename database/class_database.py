@@ -17,7 +17,9 @@ class DataBase():
         self.cur.execute(query, data)
         self.conn.commit()
         
-    def select_data(self, table_name: str, colums= tuple | None, conditions = tuple | None):
+    def select_data(self, table_name: str, colums= tuple | None,
+                    conditions = int | None):
+        
         colums_str = "*" if not colums else ", ".join(colums)
         query = f"SELECT {colums_str} FROM {table_name}"
         if conditions:

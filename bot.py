@@ -2,8 +2,8 @@ import asyncio
 import logging
 from aiogram import Dispatcher, Bot
 from config import Config, load_config
-from handlers import user_handlers, some_handlers
-from keyboards import main_menu_bar
+from handlers import user_handlers, some_handlers, test_handlers
+from keyboards.main_menu_bar import create_menu_keyboard
 
 logger = logging.getLogger(__name__) #-> инициализирум логгер
 
@@ -26,11 +26,12 @@ async def main(): #--> главаня функция бота
     #инициализирум диспечер
     dp: Dispatcher = Dispatcher()
     
-#--> main_menu_bar
+    await create_menu_keyboard(bot)
 
     #подлючаем роутеры в порядке переоритета
-    dp.include_router(user_handlers)
-    dp.include_router(some_handlers)
+    dp.include_router(user_handlers.router)
+    dp.include_router(some_handlers.router)
+    # dp.include_router(test_handlers.router)
     
     #удаляем все сообщщения которые могли придти пока бот не активен
     await bot.delete_webhook(drop_pending_updates=True)
@@ -39,4 +40,4 @@ async def main(): #--> главаня функция бота
     await dp.start_polling(bot)    
     
 if __name__ == '__main__':
-    asyncio.run(main)
+    asyncio.run(main())
