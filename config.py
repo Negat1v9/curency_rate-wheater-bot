@@ -25,5 +25,5 @@ def load_config(path: str | None = None) -> Config:
     env.read_env(path)
     return Config(tg_bot=TgBot(env('BOT_TOKEN')),
                   curency=Curency(url=env('URL')),
-                  database=DataBase(database=env('DATABASE')))
+                  database_name=DataBase(database=env('DATABASE')))
     
