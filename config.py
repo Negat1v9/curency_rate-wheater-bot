@@ -9,6 +9,10 @@ class DataBase:
 class TgBot:
     token: str
     
+@dataclass
+class Wheather:
+    token: str
+    
     
 @dataclass
 class Curency:
@@ -19,11 +23,13 @@ class Config:
     tg_bot: TgBot
     curency: Curency
     database: DataBase
+    wheather: Wheather
     
 def load_config(path: str | None = None) -> Config:
     env = Env()
     env.read_env(path)
     return Config(tg_bot=TgBot(env('BOT_TOKEN')),
                   curency=Curency(url=env('URL')),
-                  database=DataBase(database=env('DATABASE')))
+                  database=DataBase(database=env('DATABASE')),
+                  wheather=Wheather(env('WHEATHER_TOKEN')))
     

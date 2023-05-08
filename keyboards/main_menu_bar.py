@@ -1,6 +1,6 @@
 from aiogram import Bot
 from aiogram.types import BotCommand
-from lexicon.lexicon import Bot_commands
+from lexicon.lexicon_curency import Bot_commands
 
 async def create_menu_keyboard(bot: Bot):
     main_menu_commands = [BotCommand(

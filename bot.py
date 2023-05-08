@@ -2,7 +2,8 @@ import asyncio
 import logging
 from aiogram import Dispatcher, Bot
 from config import Config, load_config
-from handlers import user_handlers, some_handlers, test_handlers
+from handlers import some_handlers,user_handlers_curency,\
+    user_handlers_wheather, test_handlers
 from keyboards.main_menu_bar import create_menu_keyboard
 
 logger = logging.getLogger(__name__) #-> инициализирум логгер
@@ -28,9 +29,16 @@ async def main(): #--> главаня функция бота
     
     await create_menu_keyboard(bot)
 
-    #подлючаем роутеры в порядке переоритета
-    dp.include_router(user_handlers.router)
+    #router curency handelrs
+    dp.include_router(user_handlers_curency.router)
+    
+    #router wheather handlers
+    dp.include_router(user_handlers_wheather.router)
+    
+    #test handlers -> off
     # dp.include_router(test_handlers.router)
+    
+    #others handlers
     dp.include_router(some_handlers.router)
     
     #удаляем все сообщщения которые могли придти пока бот не активен

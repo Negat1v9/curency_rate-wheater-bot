@@ -18,7 +18,8 @@ class DataBase():
         self.conn.commit()
         
     def select_data(self, table_name: str, colums= tuple | None,
-                    name_search_column = str, conditions = int | str | None):
+                    name_search_column = str,
+                    conditions = int | str | None) -> list:
         colums_str = "*" if not colums else ", ".join(colums)
         query = f"SELECT {colums_str} FROM {table_name}"
         if conditions:

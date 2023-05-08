@@ -1,4 +1,4 @@
-from lexicon.lexicon import LEXICON, valut_symbol
+from lexicon.lexicon_curency import LEXICON, valut_symbol
 
 __supported_list: list = ["Usd", "Eur", "Cny", "Gbp",
                   "Jpy100", "Chf", "Try", "Aed"]
