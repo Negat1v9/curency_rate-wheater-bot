@@ -12,11 +12,13 @@ def _load_curency() -> str:
     data = r.text
     return data
 
-def get_curency(date: str) -> dict:
+def get_curency() -> dict:
     db = DataBase('valut.db')
     now = datetime.now()
     date_string = now.strftime("%Y-%m-%d")#->time now
-    data: list = db.select_data('valut', ('curency',), date_string)
+    # date_string = '2023-05-09'
+    data: list = db.select_data('valut', ('curency',),
+                                'data_column', date_string)
     curency: dict = {}
     if not data:
         text = _load_curency()

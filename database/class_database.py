@@ -18,13 +18,16 @@ class DataBase():
         self.conn.commit()
         
     def select_data(self, table_name: str, colums= tuple | None,
-                    conditions = int | None):
-        
+                    name_search_column = str, conditions = int | str | None):
         colums_str = "*" if not colums else ", ".join(colums)
         query = f"SELECT {colums_str} FROM {table_name}"
         if conditions:
-            query += f" WHERE {conditions}"
-        self.cur.execute(query)
+            query += f" WHERE {name_search_column} = ?"
+            #if user now where he search
+            self.cur.execute(query, (conditions,))
+        else:
+            #if user want select all
+            self.cur.execute(query)
         rows = self.cur.fetchall()
         return rows
     

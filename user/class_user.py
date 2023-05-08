@@ -9,7 +9,7 @@ class User():
         
     def init_user(self) -> None:
         db: DataBase = DataBase(self.userdb)
-        data = db.select_data('users', None, self.userid)#->checking user in db
+        data = db.select_data('users', None, 'userid', self.userid)#->checking user in db
         if not data:
             db.insert_data('users', ('userid',), (self.userid,))#->if not -> add
             db.close_conn()
@@ -20,7 +20,8 @@ class User():
             
     def add_user_valut(self, valut: str) -> bool:
         db: DataBase = DataBase(self.userdb)
-        data_text = db.select_data('users', ('uservalut',), self.userid)
+        data_text = db.select_data('users', ('uservalut',),
+                                   'userid', self.userid)
         data_list: list = self._create_list(data_text)
         if valut not in data_list:
             data_list.append(valut)

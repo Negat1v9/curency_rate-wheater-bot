@@ -7,11 +7,9 @@ def create_keyboard_valut()->ReplyKeyboardMarkup:
     keybord = []
     for i in range(len(valut_symbol)):
         bottons.append(KeyboardButton(text=valut_symbol[i]))
-        if len(bottons) == 5:
+        if len(bottons) == 4:
             keybord.append(bottons)
             bottons = []
-        # keybord: list[list[KeyboardButton()]] = [
-        # [KeyboardButton(text=text) for text in valut_symbol]]
         
     user_kb: ReplyKeyboardMarkup = ReplyKeyboardMarkup(
         keyboard=keybord,)
