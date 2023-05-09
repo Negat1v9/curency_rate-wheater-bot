@@ -2,11 +2,11 @@ from aiogram import Router
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from lexicon.lexicon_curency import LEXICON
-from fiters.filters import CheckIsCheckValutMsg
+from fiters.filters import CheckIsCheckValutMsg, CheckIsAllValut
 from keyboards.keyboards_curency import create_keyboard_valut
 from curency.requests_curency import get_curency
 from user.class_user import User
-from msg_parse.parsing import get_done_msg
+from msg_parse.parsing import get_done_msg, get_all_curency
 
 
 router: Router = Router()
@@ -38,5 +38,11 @@ async def process_valut_checking(message: Message):
     curency: dict = get_curency()
     curency_text = get_done_msg(curency=curency,
                                  message=message.text)
+    await message.answer(text=curency_text)
+    
+@router.message(CheckIsAllValut())
+async def process_all_curency(message: Message):
+    curency: dict = get_curency()
+    curency_text: str = get_all_curency(curency, message.text)
     await message.answer(text=curency_text)
     

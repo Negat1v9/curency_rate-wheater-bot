@@ -1,6 +1,6 @@
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
-from lexicon.lexicon_curency import valut_symbol
+from lexicon.lexicon_curency import valut_symbol, LEXICON
 
 def create_keyboard_valut()->ReplyKeyboardMarkup:
     bottons = []
@@ -10,6 +10,7 @@ def create_keyboard_valut()->ReplyKeyboardMarkup:
         if len(bottons) == 4:
             keybord.append(bottons)
             bottons = []
+    keybord.append([KeyboardButton(text=LEXICON['all_valut'])])
         
     user_kb: ReplyKeyboardMarkup = ReplyKeyboardMarkup(
         keyboard=keybord)

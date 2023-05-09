@@ -1,6 +1,6 @@
 from aiogram.filters import BaseFilter
 from aiogram.types import CallbackQuery, Message
-from lexicon.lexicon_curency import valut_symbol
+from lexicon.lexicon_curency import valut_symbol, LEXICON
 #редакторование городов
 class IsEditListCyty(BaseFilter):
     async def __call__(self, call_back: CallbackQuery):
@@ -27,3 +27,7 @@ class CheckIsCheckValutMsg(BaseFilter):
         text = message.text
         #checking msg is what valut
         return text in valut_symbol
+    
+class CheckIsAllValut(BaseFilter):
+    async def __call__(self, message: Message):
+        return message.text == LEXICON['all_valut']

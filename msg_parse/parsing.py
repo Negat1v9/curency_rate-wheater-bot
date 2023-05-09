@@ -13,6 +13,24 @@ def get_done_msg(curency: dict, message: str) -> str:
     msg = f"{LEXICON['start']} {name_valut}: {LEXICON['buy']} "\
         f"{curency_valut[0]}, {LEXICON['sell']} {curency_valut[1]}"
     return msg
+
+def get_all_curency(curency: dict, message: str) -> str:
+    start_msg: str = message + "\n"
+    msg: str = f"{start_msg}"
+    for i in range(len(valut_symbol)):
+        fool_string = []
+        #russian name of valut
+        name_valut = valut_symbol[i].split()[1]
+        fool_string.append(name_valut)
+        #short name valut
+        short_name = __supported_list[i]
+        #taken curency of valut
+        valut_curency = curency[short_name][0]
+        fool_string.append(valut_curency)
+        fool_string.append('руб')
+        #creating fool string
+        msg += " ".join(fool_string) + "\n"
+    return msg.rstrip()
         
 
 def _find_meaning(message: str) -> str:
