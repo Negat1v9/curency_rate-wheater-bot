@@ -1,0 +1,4 @@
+BOT_TOKEN='string bot token from BotFather in Telegram'
+URL='syte url from you want take curency'
+DATABASE='name database with users'
+WHEATHER_TOKEN='token from syte where you want take Wheather like example OpenWheather'

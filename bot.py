@@ -8,25 +8,26 @@ from keyboards.main_menu_bar import create_menu_keyboard
 
 logger = logging.getLogger(__name__) #-> инициализирум логгер
 
-async def main(): #--> главаня функция бота
+async def main(): #--> main func 
     
-    #создаем логгер и выводим информацию в консоль
+    #create looger to write in terminal
     logging.basicConfig(level=logging.INFO,
                         format='%(filename)s:%(lineno)d #%(levelname)-8s '
                         '[%(asctime)s] - %(name)s - %(message)s')
-    #сообщение о начале работы бота
+    #msg from logger about Bot is start
     logger.info('Starting bot')
     
-    #инициализация конфигурации
+    #load config for tg_token
     config: Config = load_config()
     
-    #объект бота
+    #object bot
     bot: Bot = Bot(token=config.tg_bot.token,
                    parse_mode='HTML')
     
-    #инициализирум диспечер
+    #Dispatcher
     dp: Dispatcher = Dispatcher()
     
+    #bot creating menu-bar
     await create_menu_keyboard(bot)
 
     #router curency handelrs
@@ -41,10 +42,10 @@ async def main(): #--> главаня функция бота
     #others handlers
     dp.include_router(some_handlers.router)
     
-    #удаляем все сообщщения которые могли придти пока бот не активен
+    #delete msg from time then bot was offline
     await bot.delete_webhook(drop_pending_updates=True)
     
-    #запуск бота
+    #start polling bot for updates
     await dp.start_polling(bot)    
     
 if __name__ == '__main__':
