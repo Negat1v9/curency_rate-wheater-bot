@@ -22,11 +22,11 @@ def get_wheather(cityname: str) -> dict:
 #парсинг данных с серавера в словарь
 def _get_string_data(response: dict) -> str:
     result: dict = {}
-    #температура
-    result['temp'] = response['main']['temp']
-    #тип погоды: ясно дождь и т.п.
+    #temperature in city
+    result['temp'] = int(response['main']['temp'])
+    #type wheather suny rany ...
     result['description'] = response['weather'][0]['description']
-    #название города
+    #name city
     result['city'] = response['name']
     string_msg = f"сейчас в {result['city']} {result['temp']} " \
         f"градусов - {result['description']}"
