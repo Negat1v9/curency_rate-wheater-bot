@@ -2,6 +2,7 @@ from aiogram import Router
 from aiogram.filters import (CommandStart, Command, Text)
 from aiogram.types import (Message, CallbackQuery, ReplyKeyboardRemove)
 from wheather.wheather_get import (get_wheather, parse_msg)
+from wheather.wheather_photo import get_photo_url
 from lexicon.lexicon_wheather import LEXICON_WH
 from keyboards.keybord_wheather import (create_keyboard, create_edit_keyboard)
 from fiters.filters import (IsEditListCyty, WheatherMessage, \
@@ -17,6 +18,11 @@ async def process_wheather_message(message: Message):
     data = parse_msg(message.text)
     wheather = get_wheather(data)
     if wheather['message']:
+        photo_url = get_photo_url(wheather['photo'])
+        if photo_url:
+            #send photo
+            await message.answer_photo(photo=photo_url)
+            #send message with information
         await message.answer(
             text=wheather['message'],
             reply_markup=ReplyKeyboardRemove())

@@ -10,10 +10,12 @@ def get_wheather(cityname: str) -> dict:
     wheathet_data: dict = {
         'message': None,
         'error': None,
+        'photo': None,
         'status_code': response.status_code
     }
     if _response_server(response):
         data = response.json()
+        wheathet_data['photo'] = _get_photo_id(data)
         wheathet_data['message'] = _get_string_data(data)
     else:
         wheathet_data['error'] = LEXICON_WH['error_msg']
@@ -31,6 +33,10 @@ def _get_string_data(response: dict) -> str:
     string_msg = f"сейчас в {result['city']} {result['temp']} " \
         f"градусов - {result['description']}"
     return string_msg
+
+def _get_photo_id(response: dict) -> str:
+    photoid = response['weather'][0]['icon']
+    return photoid
 
 def parse_msg(message: str) -> str:
     parse = message.strip().split()
