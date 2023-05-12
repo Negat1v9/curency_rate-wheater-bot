@@ -53,7 +53,7 @@ async def process_add_city_command(message: Message):
     citys: list = user.get_user_city()
     if data not in citys:
         status = get_wheather(data)
-        if status['status_code'] == 200:
+        if status['status_code']:
             await message.answer(
                 text=LEXICON_WH['add_city'])
             user.add_user_city(data)

@@ -2,8 +2,10 @@ import asyncio
 import logging
 from aiogram import Dispatcher, Bot
 from config import Config, load_config
-from handlers import some_handlers,user_handlers_curency,\
-    user_handlers_wheather, test_handlers
+from handlers import (some_handlers,
+                    user_handlers_curency,
+                    user_handlers_wheather,
+                    test_handlers)
 from keyboards.main_menu_bar import create_menu_keyboard
 
 logger = logging.getLogger(__name__) #-> инициализирум логгер

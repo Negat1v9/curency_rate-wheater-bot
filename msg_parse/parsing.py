@@ -20,7 +20,7 @@ def get_all_curency(curency: dict, message: str) -> str:
     for i in range(len(valut_symbol)):
         fool_string = []
         #russian name of valut
-        name_valut = valut_symbol[i].split()[1]
+        name_valut: str = '<b>'+valut_symbol[i].split()[1]+'</b>'
         fool_string.append(name_valut)
         #short name valut
         short_name = __supported_list[i]

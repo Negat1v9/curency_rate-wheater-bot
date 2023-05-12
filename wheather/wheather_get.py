@@ -7,13 +7,14 @@ def get_wheather(cityname: str) -> dict:
     config: Config = load_config()
     response = requests.get(
         f'{TOKENWH}{cityname}&lang=ru&appid={config.wheather.token}&units=metric')
+    status_code = _response_server(response)
     wheathet_data: dict = {
         'message': None,
         'error': None,
         'photo': None,
-        'status_code': response.status_code
+        'status_code': status_code
     }
-    if _response_server(response):
+    if status_code:
         data = response.json()
         wheathet_data['photo'] = _get_photo_id(data)
         wheathet_data['message'] = _get_string_data(data)
